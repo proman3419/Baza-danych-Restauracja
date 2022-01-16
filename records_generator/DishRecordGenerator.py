@@ -16,6 +16,5 @@ class DishRecordGenerator(RecordGenerator):
             args = [next(self.dish_id_generator), self.dish_names[self.helper.max_dish_id],
                     randint(0, self.helper.max_dish_category_id)]
             return self.make_query(self.procedure_name, args)
-
         else:
             return "--Empty Dish record"
