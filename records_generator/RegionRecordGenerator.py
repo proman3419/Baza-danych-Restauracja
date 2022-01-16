@@ -6,7 +6,7 @@ from itertools import count
 class RegionRecordGenerator(RecordGenerator):
     def __init__(self, helper):
         self.helper = helper
-        self.header = f"INSERT INTO Regions(RegionID, RegionName, CountryID)"
+        self.procedure_name = "AddRegion"
         self.region_id_generator = count(start=0, step=1)
         self.region_names = self.helper.load_file("data/region_names.txt")
 
@@ -14,4 +14,4 @@ class RegionRecordGenerator(RecordGenerator):
         self.helper.max_region_id += 1
         args = [next(self.region_id_generator), choice(self.region_names), 
                 randint(0, self.helper.max_country_id)]
-        return self.make_query(self.header, args)
+        return self.make_query(self.procedure_name, args)

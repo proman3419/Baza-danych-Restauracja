@@ -6,7 +6,7 @@ from itertools import count
 class CityRecordGenerator(RecordGenerator):
     def __init__(self, helper):
         self.helper = helper
-        self.header = f"INSERT INTO Cities(CityID, CityName, RegionID)"
+        self.procedure_name = "AddCity"
         self.city_id_generator = count(start=0, step=1)
         self.city_names = self.helper.load_file("data/city_names.txt")
 
@@ -14,4 +14,4 @@ class CityRecordGenerator(RecordGenerator):
         self.helper.max_city_id += 1
         args = [next(self.city_id_generator), choice(self.city_names), 
                 randint(0, self.helper.max_region_id)]
-        return self.make_query(self.header, args)
+        return self.make_query(self.procedure_name, args)
