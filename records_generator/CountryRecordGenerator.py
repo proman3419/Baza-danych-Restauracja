@@ -12,4 +12,5 @@ class CountryRecordGenerator(RecordGenerator):
     def generate_record(self) -> str:
         RGH.max_country_id += 1
         return f"INSERT INTO Countries(CountryID, CountryName) " + \
-               f"VALUES ({next(self.country_id_generator)}, {choice(self.country_names)})"
+               f"VALUES ({next(self.country_id_generator)}, " + \
+               f"{choice(self.country_names)})"

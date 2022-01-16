@@ -12,4 +12,5 @@ class CityRecordGenerator(RecordGenerator):
     def generate_record(self) -> str:
         RGH.max_city_id += 1
         return f"INSERT INTO Cities(CityID, CityName, RegionID) " + \
-               f"VALUES ({next(self.city_id_generator)}, {choice(self.city_names)}, {randint(0, RGH.max_region_id)})"
+               f"VALUES ({next(self.city_id_generator)}, " + \
+               f"{choice(self.city_names)}, {randint(0, RGH.max_region_id)})"
