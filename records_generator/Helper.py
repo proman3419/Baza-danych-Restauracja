@@ -16,6 +16,9 @@ class Helper:
         self.max_restaurant_employee_id = -1
         self.max_order_id = -1
         self.max_discount_id = -1
+        self.max_dish_category_id = -1
+        self.max_dish_id = -1
+        self.max_menu_item_id = -1
 
         self.first_names_male = self.load_file("data/first_names_male.txt")
         self.first_names_female = self.load_file("data/first_names_female.txt")
