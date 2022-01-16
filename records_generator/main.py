@@ -1,3 +1,4 @@
+from Helper import Helper
 from CountryRecordGenerator import CountryRecordGenerator
 from RegionRecordGenerator import RegionRecordGenerator
 from CityRecordGenerator import CityRecordGenerator
@@ -6,13 +7,15 @@ from ClientRecordGenerator import ClientRecordGenerator
 from CompanyRecordGenerator import CompanyRecordGenerator
 
 
-country_record_generator = CountryRecordGenerator()
-region_record_generator = RegionRecordGenerator()
-city_record_generator = CityRecordGenerator()
+helper = Helper()
 
-customer_record_generator = CustomerRecordGenerator()
-client_record_generator = ClientRecordGenerator()
-company_record_generator = CompanyRecordGenerator()
+country_record_generator = CountryRecordGenerator(helper)
+region_record_generator = RegionRecordGenerator(helper)
+city_record_generator = CityRecordGenerator(helper)
+
+customer_record_generator = CustomerRecordGenerator(helper)
+client_record_generator = ClientRecordGenerator(helper)
+company_record_generator = CompanyRecordGenerator(helper)
 
 for i in range(10):
     print(country_record_generator.generate_record())
