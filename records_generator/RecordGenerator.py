@@ -7,4 +7,7 @@ class RecordGenerator(ABC):
         raise NotImplementedError
 
     def make_query(self, procedure_name: str, args) -> str:
-        return ' '.join([procedure_name, ", ".join(map(str, args))])
+        def arg_to_query_arg(arg):
+            if type(arg) == str: return f"'{arg}'"
+            else: return str(arg)
+        return ' '.join([procedure_name, ", ".join(map(arg_to_query_arg, args))])

@@ -12,6 +12,6 @@ class RegionRecordGenerator(RecordGenerator):
 
     def generate_record(self) -> str:
         self.helper.max_region_id += 1
-        args = [next(self.region_id_generator), choice(self.region_names), 
-                randint(0, self.helper.max_country_id)]
+        args = [str(next(self.region_id_generator)), choice(self.region_names), 
+                str(randint(0, self.helper.max_country_id))]
         return self.make_query(self.procedure_name, args)
