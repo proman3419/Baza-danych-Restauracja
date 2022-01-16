@@ -12,5 +12,5 @@ class CountryRecordGenerator(RecordGenerator):
 
     def generate_record(self) -> str:
         self.helper.max_country_id += 1
-        args = [next(self.country_id_generator), choice(self.country_names)]
+        args = [str(next(self.country_id_generator)), choice(self.country_names)]
         return self.make_query(self.procedure_name, args)
