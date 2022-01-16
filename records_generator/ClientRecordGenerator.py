@@ -15,4 +15,4 @@ class ClientRecordGenerator(RecordGenerator):
                    f"{RGH.get_random_first_name(sex)}, " + \
                    f"{RGH.get_random_last_name(sex)})"
         else:
-            return "\n"
+            return "--Empty Client record"

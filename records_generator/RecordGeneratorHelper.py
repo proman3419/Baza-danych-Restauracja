@@ -13,6 +13,7 @@ class RecordGeneratorHelper:
     last_names_male = ["Kowalski", "Nowak", "Chrobak", "Woźniak", "Lewandowski"]
     last_names_female = ["Kowalska", "Nowak", "Chrobak", "Woźniak", "Lewandowska"]
     mail_service_domains = ["gmail.com", "op.pl", "yahoo.com", "wp.pl"]
+    phone_prefixes = ["48", "81", "33", "44"]
 
     @staticmethod
     def get_random_sex() -> str:
@@ -28,9 +29,9 @@ class RecordGeneratorHelper:
     @staticmethod
     def get_random_last_name(sex='m') -> str:
         if sex == 'm':
-            return choice(RecordGeneratorHelper.first_names_male)
+            return choice(RecordGeneratorHelper.last_names_male)
         else:
-            return choice(RecordGeneratorHelper.first_names_female)
+            return choice(RecordGeneratorHelper.last_names_female)
 
     # @staticmethod
     # def make_email(first_name: str, last_name: str) -> str:
@@ -43,5 +44,10 @@ class RecordGeneratorHelper:
                "@" + choice(RecordGeneratorHelper.mail_service_domains)
 
     @staticmethod
+    def get_random_numeral_str(length: int) -> str:
+        return str(randint(10**(length-1), 10**length-1))
+
+    @staticmethod
     def get_random_phone_nr() -> str:
-        return str(randint(10**7, 10**8-1))
+        return choice(RecordGeneratorHelper.phone_prefixes) + \
+               RecordGeneratorHelper.get_random_numeral_str(8)

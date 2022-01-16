@@ -3,6 +3,7 @@ from RegionRecordGenerator import RegionRecordGenerator
 from CityRecordGenerator import CityRecordGenerator
 from CustomerRecordGenerator import CustomerRecordGenerator
 from ClientRecordGenerator import ClientRecordGenerator
+from CompanyRecordGenerator import CompanyRecordGenerator
 
 
 country_record_generator = CountryRecordGenerator()
@@ -11,6 +12,7 @@ city_record_generator = CityRecordGenerator()
 
 customer_record_generator = CustomerRecordGenerator()
 client_record_generator = ClientRecordGenerator()
+company_record_generator = CompanyRecordGenerator()
 
 for i in range(10):
     print(country_record_generator.generate_record())
@@ -19,3 +21,4 @@ for i in range(10):
 
     print(customer_record_generator.generate_record())
     print(client_record_generator.generate_record())
+    print(company_record_generator.generate_record())
