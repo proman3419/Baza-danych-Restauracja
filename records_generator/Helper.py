@@ -14,6 +14,8 @@ class Helper:
         self.max_table_id = -1
         self.max_reservation_id = -1
         self.max_restaurant_employee_id = -1
+        self.max_order_id = -1
+        self.max_discount_id = -1
         self.max_dish_category_id = -1
         self.max_dish_id = -1
         self.max_menu_item_id = -1
