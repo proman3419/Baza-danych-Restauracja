@@ -5,7 +5,7 @@ from random import choice, randint
 class CompanyRecordGenerator(RecordGenerator):
     def __init__(self, helper):
         self.helper = helper
-        self.header = f"INSERT INTO Companies(CustomerID, CompanyName, Address, CityID, PostalCode, NIP)"
+        self.procedure_name = "AddCompany"
         self.last_customer_id = -1
         self.company_names = self.helper.load_file("data/company_names.txt")
         self.addresses = self.helper.load_file("data/addresses.txt")
@@ -19,6 +19,6 @@ class CompanyRecordGenerator(RecordGenerator):
                     randint(0, self.helper.max_city_id),
                     self.helper.get_random_numeral_str(5),
                     self.nip]
-            return self.make_query(self.header, args)
+            return self.make_query(self.procedure_name, args)
         else:
             return "--Empty Company record"
