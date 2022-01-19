@@ -29,8 +29,9 @@ class Helper:
         self.mail_service_domains = self.load_file("data/mail_service_domains.txt")
         self.phone_prefixes = self.load_file("data/phone_prefixes.txt")
 
-        self.start_date = datetime(2020, 1, 19).strftime('%m/%d/%Y %I:%M %p')
-        self.end_date = datetime.now().strftime('%m/%d/%Y %I:%M %p')
+        self.time_format = '%m/%d/%Y %I:%M %p'
+        self.start_date = datetime(2020, 1, 19).strftime(self.time_format)
+        self.end_date = datetime.now().strftime(self.time_format)
 
     def load_file(self, path: str) -> List[str]:
         path = path.replace('/', sep)
@@ -69,7 +70,6 @@ class Helper:
 
     def str_time_prop(self, start, end, time_format, prop):
         """Get a time at a proportion of a range of two formatted times.
-
         start and end should be strings specifying times formatted in the
         given format (strftime-style), giving an interval [start, end].
         prop specifies how a proportion of the interval to be taken after
@@ -83,8 +83,13 @@ class Helper:
 
         return time.strftime(time_format, time.localtime(ptime))
 
-    def get_random_date_str(self) -> str:
-        return self.str_time_prop(self.start_date, self.end_date, '%m/%d/%Y %I:%M %p', random.random())
+    def get_random_date_str(self):
+        return self.str_time_prop(self.start_date, self.end_date, self.time_format, random.random())
+
+    def get_random_dates_pair_str(self):
+        date1 = self.get_random_date_str()
+        date2 = self.str_time_prop(date1, self.end_date, self.time_format, random.random())
+        return (date1, date2)
 
     # def get_random_date_str(self) -> str:
     #     # https://www.kite.com/python/answers/how-to-generate-a-random-date-between-two-dates-in-python

@@ -86,9 +86,9 @@ if __name__ == "__main__":
 
     loop(discountRecordGenerator, records_cnt)
     loop(lifeLongDiscountRecordGenerator, records_cnt)
-    loop(lifeLongDiscountHistRecordGenerator, records_cnt)
+    # loop(lifeLongDiscountHistRecordGenerator, records_cnt)
     loop(singleUseDiscountRecordGenerator, records_cnt)
-    loop(singleUseDiscountHistRecordGenerator, records_cnt)
+    # loop(singleUseDiscountHistRecordGenerator, records_cnt)
 
     loop(dishCategoryRecordGenerator, records_cnt)
     loop(dishRecordGenerator, records_cnt)

@@ -11,7 +11,8 @@ class SingleUseDiscountRecordGenerator(RecordGenerator):
     def generate_record(self) -> str:
         if self.discount_id < self.helper.max_discount_id:
             self.discount_id += 1
-            args = [self.discount_id, self.helper.get_random_date_str(), self.helper.get_random_date_str(),
+            date1, date2 = self.helper.get_random_dates_pair_str()
+            args = [self.discount_id, date1, date2,
                     choice(['TRUE', 'FALSE'])]
             return self.make_query(self.procedure_name, args)
         else:
