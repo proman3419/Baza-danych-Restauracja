@@ -17,3 +17,5 @@ class EmployeeRecordGenerator(RecordGenerator):
             args = [self.max_customer_id, self.helper.get_random_first_name(sex),
                     self.helper.get_random_last_name(sex), randint(0, self.helper.max_customer_id)]
             return self.make_query(self.procedure_name, args)
+        else:
+            "--Empty Employee record"

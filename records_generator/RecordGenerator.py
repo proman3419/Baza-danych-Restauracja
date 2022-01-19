@@ -10,4 +10,4 @@ class RecordGenerator(ABC):
         def arg_to_query_arg(arg):
             if type(arg) == str: return f"'{arg}'"
             else: return str(arg)
-        return ' '.join([procedure_name, ", ".join(map(arg_to_query_arg, args))])
+        return ' '.join(["exec", procedure_name, ", ".join(map(arg_to_query_arg, args))])
