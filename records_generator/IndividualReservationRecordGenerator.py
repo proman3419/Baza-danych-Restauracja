@@ -2,7 +2,7 @@ from RecordGenerator import RecordGenerator
 from random import randint, choice
 
 
-class IndividualReservationGenerator(RecordGenerator):
+class IndividualReservationRecordGenerator(RecordGenerator):
     def __init__(self, helper):
         self.helper = helper
         self.procedure_name = "AddIndividualReservation"
