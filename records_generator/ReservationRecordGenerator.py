@@ -13,5 +13,5 @@ class ReservationRecordGenerator(RecordGenerator):
         self.helper.max_reservation_id += 1
         args = [next(self.reservation_id_generator), 
                 self.helper.get_random_date_str(),
-                randint(0, self.helper.max_restaurant_employee_id)]
+                self.helper.pick_arg_or_null((randint(0, self.helper.max_restaurant_employee_id)))]
         return self.make_query(self.procedure_name, args)

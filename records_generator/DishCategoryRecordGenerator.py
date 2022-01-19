@@ -15,4 +15,4 @@ class DishCategoryRecordGenerator(RecordGenerator):
             args = [next(self.dish_category_id_generator), self.dish_category_names[self.helper.max_dish_category_id]]
             return self.make_query(self.procedure_name, args)
         else:
-            return "--Empty Dish Category record"
+            return "--Empty DishCategory record"

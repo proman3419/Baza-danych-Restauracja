@@ -1,62 +1,118 @@
-from Helper import Helper
-from CountryRecordGenerator import CountryRecordGenerator
-from RegionRecordGenerator import RegionRecordGenerator
 from CityRecordGenerator import CityRecordGenerator
-from CustomerRecordGenerator import CustomerRecordGenerator
 from ClientRecordGenerator import ClientRecordGenerator
+from CompanyEmployeeReservationDetailsRecordGenerator import CompanyEmployeeReservationDetailsRecordGenerator
 from CompanyRecordGenerator import CompanyRecordGenerator
-from TableRecordGenerator import TableRecordGenerator
+from CompanyEmployeeReservationDetailsRecordGenerator import CompanyEmployeeReservationDetailsRecordGenerator
+from CompanyReservationDetailsRecordGenerator import CompanyReservationDetailsRecordGenerator
+from CompanyReservationRecordGenerator import CompanyReservationRecordGenerator
+from CountryRecordGenerator import CountryRecordGenerator
+from CustomerRecordGenerator import CustomerRecordGenerator
+from DiscountRecordGenerator import DiscountRecordGenerator
+from DishCategoryRecordGenerator import DishCategoryRecordGenerator
+from DishRecordGenerator import DishRecordGenerator
+from EmployeeRecordGenerator import EmployeeRecordGenerator
+from Helper import Helper
+from IndividualReservationDetailsRecordGenerator import IndividualReservationDetailsRecordGenerator
+from IndividualReservationRecordGenerator import IndividualReservationRecordGenerator
+from LifeLongDiscountHistRecordGenerator import LifeLongDiscountHistRecordGenerator
+from LifeLongDiscountRecordGenerator import LifeLongDiscountRecordGenerator
+from MenuItemRecordGenerator import MenuItemRecordGenerator
+from OrderDetailsRecordGenerator import OrderDetailsRecordGenerator
+from OrderRecordGenerator import OrderRecordGenerator
+from RegionRecordGenerator import RegionRecordGenerator
 from ReservationRecordGenerator import ReservationRecordGenerator
 from RestaurantEmployeeGenerator import RestaurantEmployeeGenerator
+from SingleUseDiscountHistRecordGenerator import SingleUseDiscountHistRecordGenerator
+from SingleUseDiscountRecordGenerator import SingleUseDiscountRecordGenerator
 from TableHistRecordGenerator import TableHistRecordGenerator
-from IndividualReservationRecordGenerator import IndividualReservationRecordGenerator
-from OrderRecordGenerator import OrderRecordGenerator
-from DiscountRecordGenerator import DiscountRecordGenerator
-from IndividualReservationDetailsRecordGenerator import IndividualReservationDetailsRecordGenerator
-from CompanyReservationRecordGenerator import CompanyReservationRecordGenerator
-from CompanyReservationDetailsRecordGenerator import CompanyReservationDetailsRecordGenerator
-from CompanyEmployeeReservationDetailsRecordGenerator import CompanyEmployeeReservationDetailsRecordGenerator
+from TableRecordGenerator import TableRecordGenerator
+from os import remove
+
 
 helper = Helper()
 
-country_record_generator = CountryRecordGenerator(helper)
-region_record_generator = RegionRecordGenerator(helper)
-city_record_generator = CityRecordGenerator(helper)
+cityRecordGenerator = CityRecordGenerator(helper)
+clientRecordGenerator = ClientRecordGenerator(helper)
+companyEmployeeReservationDetailsRecordGenerator = CompanyEmployeeReservationDetailsRecordGenerator(helper)
+companyRecordGenerator = CompanyRecordGenerator(helper)
+companyReservationDetailsRecordGenerator = CompanyReservationDetailsRecordGenerator(helper)
+companyReservationRecordGenerator = CompanyReservationRecordGenerator(helper)
+countryRecordGenerator = CountryRecordGenerator(helper)
+customerRecordGenerator = CustomerRecordGenerator(helper)
+discountRecordGenerator = DiscountRecordGenerator(helper)
+dishCategoryRecordGenerator = DishCategoryRecordGenerator(helper)
+dishRecordGenerator = DishRecordGenerator(helper)
+employeeRecordGenerator = EmployeeRecordGenerator(helper)
+individualReservationDetailsRecordGenerator = IndividualReservationDetailsRecordGenerator(helper)
+individualReservationRecordGenerator = IndividualReservationRecordGenerator(helper)
+lifeLongDiscountHistRecordGenerator = LifeLongDiscountHistRecordGenerator(helper)
+lifeLongDiscountRecordGenerator = LifeLongDiscountRecordGenerator(helper)
+menuItemRecordGenerator = MenuItemRecordGenerator(helper)
+orderDetailsRecordGenerator = OrderDetailsRecordGenerator(helper)
+orderRecordGenerator = OrderRecordGenerator(helper)
+regionRecordGenerator = RegionRecordGenerator(helper)
+reservationRecordGenerator = ReservationRecordGenerator(helper)
+restaurantEmployeeGenerator = RestaurantEmployeeGenerator(helper)
+singleUseDiscountHistRecordGenerator = SingleUseDiscountHistRecordGenerator(helper)
+singleUseDiscountRecordGenerator = SingleUseDiscountRecordGenerator(helper)
+tableHistRecordGenerator = TableHistRecordGenerator(helper)
+tableRecordGenerator = TableRecordGenerator(helper)
 
-customer_record_generator = CustomerRecordGenerator(helper)
-client_record_generator = ClientRecordGenerator(helper)
-company_record_generator = CompanyRecordGenerator(helper)
+output_file = "populate_db.sql"
+records_cnt = 100
 
-table_record_generator = TableRecordGenerator(helper)
-restaurant_employee_generator = RestaurantEmployeeGenerator(helper)
-reservation_record_generator = ReservationRecordGenerator(helper)
-table_hist_record_generator = TableHistRecordGenerator(helper)
-individual_reservation_record_generator = IndividualReservationRecordGenerator(helper)
-order_record_generator = OrderRecordGenerator(helper)
-discount_record_generator = DiscountRecordGenerator(helper)
-individual_reservation_details_record_generator = IndividualReservationDetailsRecordGenerator(helper)
-company_reservation_record_generator = CompanyReservationRecordGenerator(helper)
-company_reservation_details_record_generator = CompanyReservationDetailsRecordGenerator(helper)
-company_employee_reservation_details_record_generator = CompanyEmployeeReservationDetailsRecordGenerator(helper)
 
-for i in range(1):
-    print(country_record_generator.generate_record())
-    print(region_record_generator.generate_record())
-    print(city_record_generator.generate_record())
+def add_query_from_file(path):
+    with open(path, 'r') as from_f:
+        with open(output_file, "a+") as to_f:
+            to_f.write(f"--Query from file: {path}" + '\n')
+            data = from_f.read()
+            for l in data:
+                to_f.write(l)
 
-    print(customer_record_generator.generate_record())
-    print(client_record_generator.generate_record())
-    print(company_record_generator.generate_record())
 
-    print(table_record_generator.generate_record())
-    print(restaurant_employee_generator.generate_record())
-    print(reservation_record_generator.generate_record())
-    print(table_hist_record_generator.generate_record())
-    print(discount_record_generator.generate_record())
-    print(order_record_generator.generate_record())
+if __name__ == "__main__":
+    def loop(record_generator, records_cnt):
+        for i in range(records_cnt):
+            with open(output_file, "a+", encoding="utf-8") as f:
+                f.write(record_generator.generate_record() + '\n')
 
-    print(individual_reservation_record_generator.generate_record())
-    print(individual_reservation_details_record_generator.generate_record())
-    print(company_reservation_record_generator.generate_record())
-    print(company_reservation_details_record_generator.generate_record())
-    print(company_employee_reservation_details_record_generator.generate_record())
+    try:
+        remove(output_file)
+    except OSError:
+        pass
+
+    loop(tableRecordGenerator, records_cnt)
+    loop(customerRecordGenerator, records_cnt)
+
+    loop(countryRecordGenerator, records_cnt)
+    loop(regionRecordGenerator, records_cnt)
+    loop(cityRecordGenerator, records_cnt)
+
+    loop(clientRecordGenerator, records_cnt)
+    loop(companyRecordGenerator, records_cnt)
+    loop(employeeRecordGenerator, records_cnt)
+
+    loop(discountRecordGenerator, records_cnt)
+    loop(lifeLongDiscountRecordGenerator, records_cnt)
+    # loop(lifeLongDiscountHistRecordGenerator, records_cnt)
+    loop(singleUseDiscountRecordGenerator, records_cnt)
+    # loop(singleUseDiscountHistRecordGenerator, records_cnt)
+
+    loop(dishCategoryRecordGenerator, records_cnt)
+    loop(dishRecordGenerator, records_cnt)
+    loop(menuItemRecordGenerator, records_cnt)
+
+    loop(restaurantEmployeeGenerator, records_cnt)
+    loop(orderRecordGenerator, records_cnt)
+    loop(orderDetailsRecordGenerator, records_cnt)
+
+    loop(reservationRecordGenerator, records_cnt)
+    loop(tableHistRecordGenerator, records_cnt)
+    loop(individualReservationRecordGenerator, records_cnt)
+    loop(individualReservationDetailsRecordGenerator, records_cnt)
+    loop(companyReservationRecordGenerator, records_cnt)
+    loop(companyReservationDetailsRecordGenerator, records_cnt)
+    loop(companyEmployeeReservationDetailsRecordGenerator, records_cnt)
+
+    add_query_from_file("../helpful_queries/generateDiscountHist.sql")
