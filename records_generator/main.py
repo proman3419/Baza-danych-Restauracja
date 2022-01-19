@@ -58,15 +58,24 @@ singleUseDiscountRecordGenerator = SingleUseDiscountRecordGenerator(helper)
 tableHistRecordGenerator = TableHistRecordGenerator(helper)
 tableRecordGenerator = TableRecordGenerator(helper)
 
+output_file = "populate_db.sql"
+records_cnt = 100
+
+
+def add_query_from_file(path):
+    with open(path, 'r') as from_f:
+        with open(output_file, "a+") as to_f:
+            to_f.write(f"--Query from file: {path}" + '\n')
+            data = from_f.read()
+            for l in data:
+                to_f.write(l)
+
 
 if __name__ == "__main__":
     def loop(record_generator, records_cnt):
         for i in range(records_cnt):
             with open(output_file, "a+", encoding="utf-8") as f:
                 f.write(record_generator.generate_record() + '\n')
-
-    output_file = "populate_db.sql"
-    records_cnt = 100
 
     try:
         remove(output_file)
@@ -105,3 +114,5 @@ if __name__ == "__main__":
     loop(companyReservationRecordGenerator, records_cnt)
     loop(companyReservationDetailsRecordGenerator, records_cnt)
     loop(companyEmployeeReservationDetailsRecordGenerator, records_cnt)
+
+    add_query_from_file("../helpful_queries/generateDiscountHist.sql")
