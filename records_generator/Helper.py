@@ -1,8 +1,10 @@
+import random
 from random import choice, randint, randrange
 from string import ascii_lowercase
 from datetime import datetime, timedelta
 from typing import List
 from os import sep
+import time
 
 
 class Helper:
@@ -27,8 +29,8 @@ class Helper:
         self.mail_service_domains = self.load_file("data/mail_service_domains.txt")
         self.phone_prefixes = self.load_file("data/phone_prefixes.txt")
 
-        self.start_date = datetime(2020, 1, 19)
-        self.end_date = datetime.now()
+        self.start_date = datetime(2020, 1, 19).strftime('%m/%d/%Y %I:%M %p')
+        self.end_date = datetime.now().strftime('%m/%d/%Y %I:%M %p')
 
     def load_file(self, path: str) -> List[str]:
         path = path.replace('/', sep)
@@ -65,11 +67,30 @@ class Helper:
         return choice(self.phone_prefixes) + \
                self.get_random_numeral_str(8)
 
-    def get_random_date_str(self) -> str:
-        # https://www.kite.com/python/answers/how-to-generate-a-random-date-between-two-dates-in-python
-        time_between_dates = self.end_date - self.start_date
-        days_between_dates = time_between_dates.days
-        random_number_of_days = randrange(days_between_dates)
-        random_date = self.start_date + timedelta(days=random_number_of_days)
+    def str_time_prop(self, start, end, time_format, prop):
+        """Get a time at a proportion of a range of two formatted times.
 
-        return str(datetime.strptime(str(random_date.date()), '%Y-%m-%d').date())
+        start and end should be strings specifying times formatted in the
+        given format (strftime-style), giving an interval [start, end].
+        prop specifies how a proportion of the interval to be taken after
+        start.  The returned time will be in the specified format.
+        """
+
+        stime = time.mktime(time.strptime(start, time_format))
+        etime = time.mktime(time.strptime(end, time_format))
+
+        ptime = stime + prop * (etime - stime)
+
+        return time.strftime(time_format, time.localtime(ptime))
+
+    def get_random_date_str(self) -> str:
+        return self.str_time_prop(self.start_date, self.end_date, '%m/%d/%Y %I:%M %p', random.random())
+
+    # def get_random_date_str(self) -> str:
+    #     # https://www.kite.com/python/answers/how-to-generate-a-random-date-between-two-dates-in-python
+    #     time_between_dates = self.end_date - self.start_date
+    #     days_between_dates = time_between_dates.days
+    #     random_number_of_days = randrange(days_between_dates)
+    #     random_date = self.start_date + timedelta(days=random_number_of_days)
+    #
+    #     return str(datetime.strptime(str(random_date.date()), '%Y-%m-%d').date())
