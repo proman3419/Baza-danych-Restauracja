@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ignore records_generator's output file
+records_generator/populate_db.sql
