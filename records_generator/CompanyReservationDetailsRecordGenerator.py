@@ -15,5 +15,5 @@ class CompanyReservationDetailsRecordGenerator(RecordGenerator):
         args = [reservation_id,
                 next(self.reservation_table_ids[reservation_id]),
                 randint(0, 10),
-                randint(0, self.helper.max_table_id)]
+                self.helper.pick_arg_or_null(randint(0, self.helper.max_table_id))]
         return self.make_query(self.procedure_name, args)

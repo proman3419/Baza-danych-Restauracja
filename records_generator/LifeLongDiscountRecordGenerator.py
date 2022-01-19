@@ -13,4 +13,4 @@ class LifeLongDiscountRecordGenerator(RecordGenerator):
             args = [self.discount_id, self.helper.get_random_date_str()]
             return self.make_query(self.procedure_name, args)
         else:
-            return "--Empty Life Long Discount record"
+            return "--Empty LifeLongDiscount record"

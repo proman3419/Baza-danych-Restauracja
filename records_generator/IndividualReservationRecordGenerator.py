@@ -13,7 +13,7 @@ class IndividualReservationRecordGenerator(RecordGenerator):
         if self.max_reservation_id < self.helper.max_reservation_id:
             self.max_reservation_id += 1
             args = [self.max_reservation_id,
-                    randint(0, self.helper.max_table_id),
+                    self.helper.pick_arg_or_null(randint(0, self.helper.max_table_id)),
                     randint(0, self.helper.max_order_id),
                     choice(self.methods_of_payment)]
             return self.make_query(self.procedure_name, args)

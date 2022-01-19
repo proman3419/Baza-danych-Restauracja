@@ -27,7 +27,7 @@ class Helper:
         self.mail_service_domains = self.load_file("data/mail_service_domains.txt")
         self.phone_prefixes = self.load_file("data/phone_prefixes.txt")
 
-        self.start_date = datetime(2020, 1, 19)
+        self.start_date = datetime(2021, 11, 29)
         self.end_date = datetime.now()
 
     def load_file(self, path: str) -> List[str]:
@@ -73,3 +73,8 @@ class Helper:
         random_date = self.start_date + timedelta(days=random_number_of_days)
 
         return str(datetime.strptime(str(random_date.date()), '%Y-%m-%d').date())
+
+    def pick_arg_or_null(self, arg):
+        if randint(0, 9) < 1:
+            return None
+        return arg
